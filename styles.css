@@ -1,0 +1,353 @@
+/* Configuración Global */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Colores Base */
+.color-verde { --color-verde: #34bd94; }
+.color-azul { --color-azul: #1d5a91; }
+.color-gris-azulado { --color-gris-azulado: #475a60; }
+
+/* Botón Flotante (Contenedor y Botón) */
+#chat-button-container {
+    /* Mantenemos el botón en la esquina, aunque el chat se centre */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#open-chat-button {
+    background-color: var(--color-verde); /* Verde */
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+#open-chat-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor Principal del Chatbot (Modal) */
+#chatbot-container {
+    /* AJUSTES PARA AGRANDAR EL CHATBOT Y CENTRARLO */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado */
+    width: 95vw;
+    max-width: 600px; 
+    height: 95vh; 
+    max-height: 800px; 
+    /* FIN DE AJUSTES */
+
+    background-color: #e5e7eb; /* Light Gray for background */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    z-index: 1001;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+#chatbot-container.open {
+    display: flex;
+}
+
+/* Header del Chatbot */
+.chat-header {
+    background-color: var(--color-azul); /* Azul oscuro */
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+        
+#chat-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.logo-icon {
+    color: var(--color-verde); /* Icono verde */
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+#close-chat-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+#close-chat-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Área de Mensajes */
+.messages-area {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f7f7f7; /* Fondo del área de mensajes */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Burbujas de Mensaje */
+.message-bubble {
+    max-width: 85%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.message-user {
+    background-color: var(--color-verde); /* Verde para el usuario */
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px; /* Punta del usuario */
+}
+
+.message-bot {
+    background-color: var(--color-azul); /* Azul para el bot */
+    color: white;
+    margin-right: auto;
+    border-bottom-left-radius: 4px; /* Punta del bot */
+}
+        
+.message-bot p, .message-user p {
+    margin: 0;
+}
+        
+/* Estilo para comandos de testing */
+.message-bot.system-command {
+    background-color: var(--color-gris-azulado); /* Gris oscuro */
+    color: white;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Indicador de Escritura */
+.typing-indicator {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-gris-azulado);
+    padding: 5px 15px;
+}
+        
+/* Contenedor de Botones (Chips) */
+.button-options-container {
+    padding: 10px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background-color: #fff; /* Fondo blanco */
+    border-top: 1px solid #eee;
+}
+
+/* Estilo de Botón Chip */
+.chip-button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* Botón Primario (Azul) */
+.chip-button-primary {
+    background-color: var(--color-azul);
+    color: white;
+}
+
+.chip-button-primary:hover:not(:disabled) {
+    background-color: #1a4a79;
+}
+        
+/* Botón de Acento (Verde/Teal) */
+.chip-button-accent {
+    background-color: var(--color-verde); /* Verde principal */
+    color: white;
+}
+        
+.chip-button-accent:hover:not(:disabled) {
+    background-color: #2da37e;
+}
+        
+/* Botón de Flujo (Volver al Menú) */
+.chip-button-flow {
+    background-color: var(--color-gris-azulado); /* Gris oscuro */
+    color: white;
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chip-button-flow:hover:not(:disabled) {
+    background-color: #3b4c52;
+}
+        
+/* Botones de Soporte y Escalada */
+.chip-button-support {
+     background-color: #eab308; /* Amarillo para soporte */
+     color: black;
+}
+        
+.chip-button-support:hover:not(:disabled) {
+     background-color: #d9a008;
+}
+        
+.chip-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+        
+/* Área de Input */
+.input-area {
+    background-color: #fff;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.input-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#user-input:focus {
+    border-color: var(--color-azul);
+}
+        
+#user-input:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+#send-button {
+    background-color: var(--color-verde); /* Verde para el botón de enviar */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#send-button:hover:not(:disabled) {
+    background-color: #2da37e;
+}
+        
+#send-button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+        
+#send-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+        
+/* Caja de Simulación de Carga (Flujo 10) */
+.upload-simulation-box {
+    background-color: var(--color-gris-azulado) !important;
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+        
+/* Botón de TTS (Text-to-Speech) */
+.tts-button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+        
+.tts-button {
+    background: none;
+    border: 1px solid var(--color-gris-azulado);
+    color: var(--color-gris-azulado);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.7;
+}
+        
+.tts-button:hover {
+    opacity: 1;
+    border-color: var(--color-azul);
+    color: var(--color-azul);
+}
+        
+.tts-button.playing {
+    background-color: var(--color-verde);
+    color: white;
+    border-color: var(--color-verde);
+    animation: pulse-tts 1.5s infinite;
+}
+        
+@keyframes pulse-tts {
+    0% { box-shadow: 0 0 0 0 rgba(52, 189, 148, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(52, 189, 148, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 189, 148, 0); }
+}

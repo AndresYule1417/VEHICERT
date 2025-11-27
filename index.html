@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEHI-ASISTENTE Chatbot</title>
+    <!-- Enlace al CSS personalizado -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Incluir Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos Lucide -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+
+</head>
+<body class="color-verde color-azul color-gris-azulado">
+
+    <!-- Contenedor para el Botón Flotante -->
+    <div id="chat-button-container">
+        <button id="open-chat-button" aria-label="Abrir Chat">
+             <!-- Icono de chat para el botón flotante -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+    </div>
+
+    <!-- Contenedor del Chatbot (Modal Flotante) -->
+    <div id="chatbot-container">
+        
+        <!-- Header del Chatbot (Azul) -->
+        <header class="chat-header">
+            <h1 id="chat-title">
+                <!-- Logo de la empresa -->
+                <span class="logo-icon">
+                    <!-- Logo de la empresa -->
+                    <img src="img/logo.png" alt="Logo VEHI-ASISTENTE" width="16" height="16">
+                </span>
+                VEHI-ASISTENTE
+            </h1>
+            <button id="close-chat-button" aria-label="Cerrar Chat">
+                <!-- Icono de X para cerrar -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </header>
+
+        <!-- Área de Mensajes -->
+        <div class="messages-area" id="messages-area">
+            <!-- Los mensajes se insertarán aquí por JavaScript -->
+        </div>
+
+        <!-- Área de Input y Botones -->
+        <div class="input-area" id="input-area">
+            <!-- Los botones de opción (chips) se insertarán aquí por JavaScript -->
+            <div class="button-options-container" id="button-options-container"></div>
+            
+            <!-- Input del Usuario y Botón de Enviar -->
+            <form class="input-form" id="input-form">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off" disabled>
+                <button type="submit" id="send-button" aria-label="Enviar">
+                    <!-- Icono de Send -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="m22 2-7 18-3-7L2 10l18-7z"/></svg>
+                </button>
+            </form>
+            
+             <!-- Mensaje inferior para simular cambio de modo -->
+            <p id="keyboard-message" style="text-align: center; font-size: 0.75rem; color: #9ca3af; margin-top: 5px;">
+                Alternar a teclado
+            </p>
+        </div>
+    </div>
+
+    <!-- Incluir JavaScript -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
