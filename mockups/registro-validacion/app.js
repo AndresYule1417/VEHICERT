@@ -1,4 +1,97 @@
-// Opción 3 Wizard avanzado
+// Dashboard + Wizard Registro & Validación (toggle simple)
+const vehiculosList = document.getElementById('vehiculosList');
+const searchVeh = document.getElementById('searchVeh');
+const scoreDashboard = document.getElementById('scoreDashboard');
+const alertasList = document.getElementById('alertasList');
+const btnGenerarCertGlobal = document.getElementById('btnGenerarCertGlobal');
+const btnRegistrarVeh = document.getElementById('btnRegistrarVeh');
+const dashboardEl = document.getElementById('dashboard');
+const wizardEl = document.getElementById('wizard');
+const btnVerWizard = document.getElementById('btnVerWizard');
+const btnVerDashboard = document.getElementById('btnVerDashboard');
+
+// Datos mock de vehículos
+let vehiculos = [
+  {id:'ABC-123', modelo:'Mazda 3 Touring 2018', evidencias:3, score:82, img:'https://picsum.photos/seed/mazda/300/200'},
+  {id:'XYZ-987', modelo:'Chevrolet Spark 2016', evidencias:0, score:null, img:'https://picsum.photos/seed/spark/300/200'},
+  {id:'MNO-555', modelo:'Ford Ranger 2015', evidencias:1, score:69, img:'https://picsum.photos/seed/ranger/300/200'}
+];
+let vehiculoActivo = null; // id vehículo que abre flujo
+
+function renderVehiculos(list){
+  vehiculosList.innerHTML='';
+  if(!list.length){vehiculosList.innerHTML='<div class="veh-empty">Sin vehículos registrados</div>';return;}
+  list.forEach(v=>{
+    const card = document.createElement('div');
+    card.className='veh-card';
+    card.innerHTML = `
+      <img class="veh-thumb" src="${v.img}" alt="Foto ${v.modelo}"/>
+      <div class="veh-meta">
+        <h3 class="veh-title">${v.id} • ${v.modelo}</h3>
+        <p class="veh-sub">${v.evidencias} evidencias</p>
+        <div class="veh-sub">${v.score!==null? 'Score '+v.score:'Sin VEHI-Score'}</div>
+      </div>
+      <div class="veh-actions">
+        <button class="btn info" data-ver="${v.id}">Ver</button>
+        <button class="btn ghost" data-subir="${v.id}">Subir evidencia</button>
+        <button class="btn primary" data-cert="${v.id}">Generar certificado</button>
+      </div>
+      <div class="badge-score ${v.score===null? 'pending':''}">${v.score===null?'--':v.score}</div>`;
+    vehiculosList.appendChild(card);
+  });
+  vehiculosList.querySelectorAll('[data-cert],[data-ver],[data-subir]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      vehiculoActivo = btn.getAttribute('data-cert')||btn.getAttribute('data-ver')||btn.getAttribute('data-subir');
+      // Mostrar wizard
+      showWizard();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+}
+function filterVehiculos(){
+  const q = searchVeh.value.trim().toLowerCase();
+  renderVehiculos(vehiculos.filter(v=> (v.id.toLowerCase().includes(q) || v.modelo.toLowerCase().includes(q))));
+}
+searchVeh && searchVeh.addEventListener('input',filterVehiculos);
+
+function updateDashboardScore(){
+  const ultimo = vehiculos.find(v=> v.score!==null) || vehiculos[0];
+  scoreDashboard.textContent = ultimo && ultimo.score!==null? ultimo.score:'--';
+}
+function renderAlertas(){
+  const arr = [];
+  vehiculos.forEach(v=>{
+    if(v.score===null) arr.push(`${v.id}: Sin evidencias registradas`);
+    else if(v.score<70) arr.push(`${v.id}: Score bajo (${v.score})`);
+  });
+  alertasList.innerHTML = arr.map(a=> `<li><span>${a}</span></li>`).join('');
+}
+btnGenerarCertGlobal && btnGenerarCertGlobal.addEventListener('click',()=>{
+  // Simular acción global
+  alertMsg('Abriendo flujo de registro','info');
+  vehiculoActivo = vehiculos[0].id; showWizard();
+});
+btnRegistrarVeh && btnRegistrarVeh.addEventListener('click',()=>{
+  const nuevoId = 'NEW-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  vehiculos.push({id:nuevoId, modelo:'Nuevo Vehículo', evidencias:0, score:null, img:'https://picsum.photos/seed/'+nuevoId+'/300/200'});
+  filterVehiculos();renderAlertas();
+  alertMsg('Vehículo registrado '+nuevoId,'ok');
+});
+
+function showWizard(){
+  dashboardEl.style.display='none';
+  wizardEl.style.display='block';
+}
+function showDashboard(){
+  wizardEl.style.display='none';
+  dashboardEl.style.display='grid';
+}
+btnVerWizard && btnVerWizard.addEventListener('click',e=>{e.preventDefault();showWizard();});
+btnVerDashboard && btnVerDashboard.addEventListener('click',e=>{e.preventDefault();showDashboard();});
+
+// ---------------- FIN DASHBOARD SETUP -----------------
+// (Wizard existente debajo)
+// Opción 3 Wizard avanzado (legacy dentro de overlay)
 const steps = [...document.querySelectorAll('.step')];
 const panels = [...document.querySelectorAll('.panel')];
 const progressFill = document.getElementById('progressFill');
@@ -280,4 +373,4 @@ function alertMsg(msg,type){
 }
 
 // Inicialización
-activateStep(0);syncBadges();
+activateStep(0);syncBadges();renderVehiculos(vehiculos);updateDashboardScore();renderAlertas();showWizard();
