@@ -5,7 +5,7 @@
 .brand{display:flex;align-items:center;gap:14px}
 .logo-wrap{height:80px;width:80px;display:flex;align-items:center;justify-content:center;border:2px solid var(--primary);border-radius:14px;background:var(--c-gray-050);box-shadow:0 4px 12px rgba(0,0,0,.12)}
 .logo-img{height:100%;width:auto}
-.wordmark{font-weight:800;font-size:20px;letter-spacing:.5px}
+.wordmark{font-weight:800;font-size:20px;letter-spacing:.5px;color:var(--c-blue-700)}
 .link{color:var(--text);text-decoration:none;margin-left:18px;font-size:14px}
 .link:hover{text-decoration:underline}
 .layout{max-width:1600px;margin:0 auto;padding:28px 34px;display:grid;grid-template-columns:320px 1fr;gap:34px}
