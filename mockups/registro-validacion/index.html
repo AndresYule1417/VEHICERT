@@ -1,51 +1,6 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>VEHICERT | Registro & Validación (Opción 3)</title><link rel="stylesheet" href="styles.css"/></head><body>
-<header class="site-header" role="banner"><div class="brand"><div class="logo-wrap"><img src="../registro-validacion/assets/logo.png" alt="Logo VEHICERT" class="logo-img" onerror="this.outerHTML = '<span class=\'logo-fallback\'>VEHICERT</span>';"/></div><div class="wordmark">VEHICERT</div></div><nav aria-label="Enlaces principales"><a class="link" href="#" id="btnVerWizard">Registro</a><a class="link" href="#" id="btnVerDashboard">Dashboard</a><a class="link" href="#">Ayuda</a><a class="link admin-link" href="#">Portal Admin</a></nav></header>
-<!-- DASHBOARD PRINCIPAL (simple toggle) -->
-<div class="dash-wrapper" id="dashboard" role="application" aria-label="Dashboard VEHICERT" style="display:none">
-  <aside class="dash-sidebar" role="navigation" aria-label="Menú lateral">
-    <div class="side-brand">
-      <img src="../registro-validacion/assets/logo.png" alt="Logo VEHICERT" class="side-logo" onerror="this.outerHTML='<span class=logo-fallback>VEHICERT</span>'"/>
-      <h1 class="side-title">VEHICERT</h1>
-    </div>
-    <nav class="side-nav" aria-label="Secciones">
-      <button class="nav-item active" data-section="inicio">Inicio</button>
-      <button class="nav-item" data-section="mis">Mis Vehículos</button>
-      <button class="nav-item" data-section="mant">Mantenimientos</button>
-      <button class="nav-item" data-section="reportes">Reportes</button>
-      <button class="nav-item" data-section="soporte">Soporte</button>
-    </nav>
-    <div class="sync-info" aria-live="polite">Última sincronización: <span id="lastSync">hace 2 días</span></div>
-  </aside>
-  <div class="dash-main">
-    <header class="dash-header" role="banner">
-      <div class="search-box" role="search">
-        <input id="searchVeh" type="text" placeholder="Buscar por placa, VIN o modelo..." aria-label="Buscar vehículo"/>
-      </div>
-      <div class="header-actions">
-        <button class="btn small primary" id="btnRegistrarVeh">+ Registrar vehículo</button>
-        <div class="user-box" aria-label="Usuario actual">Hola, <strong>Usuario</strong></div>
-      </div>
-    </header>
-    <section class="panel-grid" aria-label="Contenido principal">
-      <div class="panel-left">
-        <h2 class="section-title">Mis Vehículos</h2>
-        <p class="section-sub">Resumen rápido del estado de tus vehículos</p>
-        <div id="vehiculosList" class="veh-list" aria-live="polite"></div>
-        <div class="global-actions">
-          <button class="btn primary full" id="btnGenerarCertGlobal">Generar Certificado VEHICERT</button>
-          <button class="btn ghost full" id="btnAgendarInspeccion">Agendar inspección</button>
-        </div>
-      </div>
-      <div class="panel-right" aria-label="Indicadores y alertas">
-        <div class="info-card" id="alertasCard"><h3>Alertas rápidas</h3><ul id="alertasList" class="mini-list"></ul></div>
-        <div class="info-card" id="scoreCard"><h3>VEHI-Score (Último vehículo)</h3><div class="score-big" id="scoreDashboard">--</div><small>Puntaje basado en datos registrados</small></div>
-        <div class="info-card" id="recCard"><h3>Recomendación IA</h3><p id="recMensaje">Buen trabajo — mantener revisiones periódicas aumentará tu VEHI-Score.</p></div>
-        <div class="info-card" id="reportCard"><h3>Reportes</h3><button class="btn info full" id="btnDescargarReporte">Descargar reporte</button></div>
-      </div>
-    </section>
-  </div>
-<!-- WIZARD ORIGINAL -->
-<main class="layout" id="wizard" role="main">
+<header class="site-header" role="banner"><div class="brand"><div class="logo-wrap"><img src="../../assets/logo.png" alt="Logo VEHICERT" class="logo-img" onerror="this.outerHTML = '<span class=\'logo-fallback\'>VEHICERT</span>';"/></div><div class="wordmark">VEHICERT</div></div><nav aria-label="Enlaces principales"><a class="link" href="#">Inicio</a><a class="link" href="#">Ayuda</a><a class="link admin-link" href="#">Portal Admin</a></nav></header>
+<main class="layout" role="main">
   <aside class="sidebar" role="complementary" aria-label="Resumen del expediente">
     <h2 class="sb-title">Estado del Expediente</h2>
     <ul class="status-list" id="statusList">
@@ -200,7 +155,7 @@
     </div>
     <div id="alertsWrap" class="alerts" aria-live="assertive"></div>
   </section>
-  </main>
+</main>
 <footer class="site-footer" role="contentinfo">© 2025 VEHICERT | <a class="link" href="#">Términos</a></footer>
 <script src="app.js"></script>
 </body></html>
