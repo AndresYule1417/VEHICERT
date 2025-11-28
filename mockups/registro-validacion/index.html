@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>VEHICERT | Registro & Validación (Opción 3)</title><link rel="stylesheet" href="styles.css"/></head><body>
+<header class="site-header" role="banner"><div class="brand"><div class="logo-wrap"><img src="../../assets/logo.png" alt="Logo VEHICERT" class="logo-img" onerror="this.outerHTML = '<span class=\'logo-fallback\'>VEHICERT</span>';"/></div><div class="wordmark">VEHICERT</div></div><nav aria-label="Enlaces principales"><a class="link" href="#">Inicio</a><a class="link" href="#">Ayuda</a><a class="link admin-link" href="#">Portal Admin</a></nav></header>
+<main class="layout" role="main">
+  <aside class="sidebar" role="complementary" aria-label="Resumen del expediente">
+    <h2 class="sb-title">Estado del Expediente</h2>
+    <ul class="status-list" id="statusList">
+      <li>Placa <span id="badgePlaca" class="badge pending">Pendiente</span></li>
+      <li>VIN <span id="badgeVin" class="badge pending">Pendiente</span></li>
+      <li>RUNT <span id="badgeRunt" class="badge pending">Pendiente</span></li>
+      <li>Fotos <span id="badgeFotos" class="badge pending">Pendiente</span></li>
+      <li>Docs <span id="badgeDocs" class="badge pending">Pendiente</span></li>
+      <li>Mantenim. <span id="badgeMant" class="badge pending">Pendiente</span></li>
+      <li>Emisiones <span id="badgeEmi" class="badge pending">Pendiente</span></li>
+      <li>Seguros <span id="badgeSeg" class="badge pending">Pendiente</span></li>
+      <li>Custodia <span id="badgeCust" class="badge pending">Pendiente</span></li>
+      <li>Firma <span id="badgeFirma" class="badge pending">Pendiente</span></li>
+      <li>Geo <span id="badgeGeo" class="badge pending">Pendiente</span></li>
+      <li>Score <span id="badgeScore" class="badge pending">Pendiente</span></li>
+    </ul>
+    <div class="progress-block"><div class="progress-label" id="progressLabel">Progreso 0%</div><div class="progress-bar" aria-label="Progreso de pasos"><div class="progress-fill" id="progressFill"></div></div></div>
+    <button class="btn full ghost" id="btnExport" disabled>Exportar Certificado</button>
+  </aside>
+  <section class="content" aria-labelledby="tituloFlujo">
+    <h1 id="tituloFlujo">Registro & Validación Integral</h1>
+    <p class="subtitle">Flujo avanzado con consistencia, trazabilidad y verificación extendida.</p>
+    <div class="steps" role="tablist" aria-label="Pasos del proceso" id="steps">
+      <button class="step" role="tab" aria-controls="panel-ident" id="tab-ident">1 Identificación</button>
+      <button class="step" role="tab" aria-controls="panel-tec" id="tab-tec">2 Técnicos</button>
+      <button class="step" role="tab" aria-controls="panel-evid" id="tab-evid">3 Evidencias</button>
+      <button class="step" role="tab" aria-controls="panel-mant" id="tab-mant">4 Mantenim.</button>
+      <button class="step" role="tab" aria-controls="panel-emis" id="tab-emis">5 Emisiones</button>
+      <button class="step" role="tab" aria-controls="panel-seg" id="tab-seg">6 Seguros</button>
+      <button class="step" role="tab" aria-controls="panel-cust" id="tab-cust">7 Custodia</button>
+      <button class="step" role="tab" aria-controls="panel-firma" id="tab-firma">8 Firma</button>
+      <button class="step" role="tab" aria-controls="panel-geo" id="tab-geo">9 Geolocal.</button>
+      <button class="step" role="tab" aria-controls="panel-score" id="tab-score">10 Score</button>
+      <button class="step" role="tab" aria-controls="panel-valid" id="tab-valid">11 Validación</button>
+    </div>
+    <!-- Panel Identificación -->
+    <div class="panel" id="panel-ident" role="tabpanel" aria-labelledby="tab-ident">
+      <h2>Identificación</h2>
+      <div class="grid g2">
+        <div class="field"><label for="placa">Placa</label><input id="placa" maxlength="6" placeholder="ABC123" aria-required="true"/></div>
+        <div class="field"><label for="vin">VIN</label><input id="vin" maxlength="17" placeholder="17 caracteres" aria-required="true"/></div>
+        <div class="field"><label for="pais">País Matrícula</label><select id="pais"><option value="">--</option><option>CO</option><option>US</option><option>MX</option></select></div>
+        <div class="field"><label for="servicio">Tipo de Servicio</label><select id="servicio"><option value="">--</option><option>Particular</option><option>Público</option><option>Comercial</option></select></div>
+        <div class="field"><label for="clase">Clase</label><select id="clase"><option value="">--</option><option>Sedán</option><option>Camioneta</option><option>Moto</option><option>Pick-up</option></select></div>
+        <div class="field"><label for="combustible">Combustible</label><select id="combustible"><option value="">--</option><option>Gasolina</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option></select></div>
+      </div>
+      <div class="actions-row"><button class="btn info" data-next="1">Continuar</button></div>
+    </div>
+    <!-- Panel Técnicos -->
+    <div class="panel" id="panel-tec" role="tabpanel" aria-labelledby="tab-tec">
+      <h2>Datos Técnicos</h2>
+      <div class="grid g3">
+        <div class="field"><label for="marca">Marca</label><input id="marca"/></div>
+        <div class="field"><label for="modelo">Modelo</label><input id="modelo"/></div>
+        <div class="field"><label for="anio">Año</label><input id="anio" type="number" min="1980" max="2025"/></div>
+        <div class="field"><label for="km">Kilometraje</label><input id="km" type="number" min="0"/></div>
+        <div class="field"><label for="norma">Norma Emisiones</label><select id="norma"><option value="">--</option><option>Euro 3</option><option>Euro 4</option><option>Euro 5</option><option>Euro 6</option></select></div>
+        <div class="field"><label for="ejes">Nº Ejes</label><input id="ejes" type="number" min="1"/></div>
+      </div>
+      <div class="actions-row"><button class="btn ghost" data-prev="0">Atrás</button><button class="btn info" data-next="2">Continuar</button></div>
+    </div>
+    <!-- Panel Evidencias -->
+    <div class="panel" id="panel-evid" role="tabpanel" aria-labelledby="tab-evid">
+      <h2>Evidencias</h2>
+      <div class="grid g2">
+        <div class="field"><label for="fotos">Fotos Vehículo (mín 6)</label><input id="fotos" type="file" accept="image/*" multiple/></div>
+        <div class="field"><label for="docs">Documentos (SOAT, Tecnomec) mín 3</label><input id="docs" type="file" multiple/></div>
+        <div class="field"><label for="video">Video corto (opcional)</label><input id="video" type="file" accept="video/*"/></div>
+        <div class="field"><label for="fotoTablero">Foto Tablero</label><input id="fotoTablero" type="file" accept="image/*"/></div>
+      </div>
+      <div class="previews" id="previewFotos"></div>
+      <div class="actions-row"><button class="btn ghost" data-prev="1">Atrás</button><button class="btn info" data-next="3">Continuar</button></div>
+    </div>
+    <!-- Panel Mantenimientos -->
+    <div class="panel" id="panel-mant" role="tabpanel" aria-labelledby="tab-mant">
+      <h2>Mantenimientos</h2>
+      <p>Registra servicios clave para corroborar kilometraje.</p>
+      <div class="field"><label for="mantFecha">Fecha</label><input id="mantFecha" type="date"/></div>
+      <div class="field"><label for="mantTipo">Tipo</label><select id="mantTipo"><option>General</option><option>Aceite</option><option>Frenos</option><option>Llantas</option><option>Motor</option></select></div>
+      <div class="field"><label for="mantKm">Km registrado</label><input id="mantKm" type="number" min="0"/></div>
+      <button class="btn primary" id="btnAddMant">Agregar</button>
+      <table class="table" id="mantTabla" aria-label="Lista mantenimientos"><thead><tr><th>Fecha</th><th>Tipo</th><th>Km</th><th></th></tr></thead><tbody></tbody></table>
+      <div class="actions-row"><button class="btn ghost" data-prev="2">Atrás</button><button class="btn info" data-next="4">Continuar</button></div>
+    </div>
+    <!-- Panel Emisiones -->
+    <div class="panel" id="panel-emis" role="tabpanel" aria-labelledby="tab-emis">
+      <h2>Emisiones</h2>
+      <div class="grid g2">
+        <div class="field"><label for="revFecha">Última Revisión</label><input id="revFecha" type="date"/></div>
+        <div class="field"><label for="revCO2">CO₂ g/km</label><input id="revCO2" type="number" min="0"/></div>
+        <div class="field"><label for="revOpacidad">Opacidad %</label><input id="revOpacidad" type="number" min="0" max="100"/></div>
+        <div class="field"><label for="revLab">Laboratorio</label><input id="revLab"/></div>
+      </div>
+      <div class="actions-row"><button class="btn ghost" data-prev="3">Atrás</button><button class="btn info" data-next="5">Continuar</button></div>
+    </div>
+    <!-- Panel Seguros -->
+    <div class="panel" id="panel-seg" role="tabpanel" aria-labelledby="tab-seg">
+      <h2>Seguros</h2>
+      <div class="grid g2">
+        <div class="field"><label for="soatVig">SOAT Vigencia</label><input id="soatVig" type="date"/></div>
+        <div class="field"><label for="polizaVig">Póliza Todo Riesgo (fin)</label><input id="polizaVig" type="date"/></div>
+        <div class="field"><label for="siniestros">Siniestros últimos 2 años</label><input id="siniestros" type="number" min="0"/></div>
+        <div class="field"><label for="aseguradora">Aseguradora</label><input id="aseguradora"/></div>
+      </div>
+      <div class="actions-row"><button class="btn ghost" data-prev="4">Atrás</button><button class="btn info" data-next="6">Continuar</button></div>
+    </div>
+    <!-- Panel Custodia -->
+    <div class="panel" id="panel-cust" role="tabpanel" aria-labelledby="tab-cust">
+      <h2>Cadena de Custodia</h2>
+      <p>Propietarios e intermediarios previos.</p>
+      <div class="field"><label for="custNombre">Nombre/Razón Social</label><input id="custNombre"/></div>
+      <div class="field"><label for="custDesde">Desde</label><input id="custDesde" type="date"/></div>
+      <div class="field"><label for="custHasta">Hasta</label><input id="custHasta" type="date"/></div>
+      <button class="btn primary" id="btnAddCust">Agregar</button>
+      <table class="table" id="custTabla" aria-label="Historial propiedad"><thead><tr><th>Nombre</th><th>Desde</th><th>Hasta</th><th></th></tr></thead><tbody></tbody></table>
+      <div class="actions-row"><button class="btn ghost" data-prev="5">Atrás</button><button class="btn info" data-next="7">Continuar</button></div>
+    </div>
+    <!-- Panel Firma -->
+    <div class="panel" id="panel-firma" role="tabpanel" aria-labelledby="tab-firma">
+      <h2>Firma Digital</h2>
+      <p>Firma para avalar la veracidad de los datos.</p>
+      <canvas id="firmaCanvas" width="480" height="160" aria-label="Área de firma"></canvas>
+      <div class="row"><button class="btn ghost" id="btnClearFirma">Limpiar</button><button class="btn primary" id="btnGuardarFirma" disabled>Guardar Firma</button></div>
+      <div class="actions-row"><button class="btn ghost" data-prev="6">Atrás</button><button class="btn info" data-next="8">Continuar</button></div>
+    </div>
+    <!-- Panel Geolocalización -->
+    <div class="panel" id="panel-geo" role="tabpanel" aria-labelledby="tab-geo">
+      <h2>Geolocalización</h2>
+      <p>Captura punto y metadatos al momento de registro.</p>
+      <button class="btn primary" id="btnGeo">Obtener Ubicación</button>
+      <pre id="geoData" class="geo-box" aria-live="polite"></pre>
+      <div class="actions-row"><button class="btn ghost" data-prev="7">Atrás</button><button class="btn info" data-next="9">Continuar</button></div>
+    </div>
+    <!-- Panel Score -->
+    <div class="panel" id="panel-score" role="tabpanel" aria-labelledby="tab-score">
+      <h2>VEHI-Score</h2>
+      <p>Indicador compuesto de estado y confiabilidad.</p>
+      <div class="score-box"><div id="scoreValor" class="score-number">--</div><div id="scoreDetalle" class="score-detalle"></div></div>
+      <button class="btn primary" id="btnCalcularScore">Calcular Score</button>
+      <div class="actions-row"><button class="btn ghost" data-prev="8">Atrás</button><button class="btn info" data-next="10">Continuar</button></div>
+    </div>
+    <!-- Panel Validación Final -->
+    <div class="panel" id="panel-valid" role="tabpanel" aria-labelledby="tab-valid">
+      <h2>Validación y Emisión</h2>
+      <div class="validation-box">
+        <p>Resumen de chequeos IA, consistencia y completitud.</p>
+        <div id="validResumen"></div>
+        <button class="btn ghost" id="btnRecalcular">Recalcular</button>
+        <button class="btn primary" id="btnEmitir" disabled>Emitir Certificado</button>
+      </div>
+      <div class="actions-row"><button class="btn ghost" data-prev="9">Atrás</button></div>
+    </div>
+    <div id="alertsWrap" class="alerts" aria-live="assertive"></div>
+  </section>
+</main>
+<footer class="site-footer" role="contentinfo">© 2025 VEHICERT | <a class="link" href="#">Términos</a></footer>
+<script src="app.js"></script>
+</body></html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VEHICERT – Inicio y Login Seguro (Chips)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="logo-wrap">
+        <img src="../inicio-login/assets/logo.png" alt="VEHICERT" class="logo-img" />
+      </div>
+      <div class="wordmark" aria-label="VEHICERT">VEHICERT</div>
+    </div>
+    <nav class="top-actions">
+      <a href="#legal" class="link">Privacidad</a>
+      <a href="#legal" class="link">Términos</a>
+      <a href="#admin" class="link admin-link">Portal Admin</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <section class="hero-copy">
+      <h1>Transparencia vehicular certificada con IA</h1>
+      <p>
+        Centraliza historial técnico, legal y financiero de tu vehículo.
+        Consulta certificados VEHICERT y agenda con talleres aliados.
+      </p>
+      <ul class="value-list">
+        <li>Certificado VEHICERT unificado</li>
+        <li>Integraciones RUNT / SIMIT / Aseguradoras</li>
+        <li>VEHI-Score y alertas automáticas</li>
+      </ul>
+    </section>
+
+    <section class="auth-card" aria-labelledby="auth-title">
+      <h2 id="auth-title">Iniciar sesión</h2>
+
+      <div class="role-suggest">
+        <span class="label">Selecciona tu perfil</span>
+        <div class="chips" role="group" aria-label="Seleccionar tipo de acceso">
+          <button class="chip" data-role="usuario" aria-pressed="true">Usuario (comprar y vender)</button>
+          <button class="chip" data-role="compraventa" aria-pressed="false">Compraventa</button>
+          <button class="chip" data-role="concesionario" aria-pressed="false">Concesionario</button>
+          <button class="chip" data-role="taller" aria-pressed="false">Taller</button>
+        </div>
+      </div>
+
+      <form id="emailForm" class="form" novalidate>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" required placeholder="tucorreo@ejemplo.com" />
+          <div class="error" id="emailError" role="alert"></div>
+        </div>
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input id="password" name="password" type="password" required placeholder="••••••••" />
+          <div class="error" id="passwordError" role="alert"></div>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="consentCheck" />
+          <label for="consentCheck">
+            Acepto el tratamiento de datos y autorizo consultas a RUNT/SIMIT.
+            <button type="button" class="link link-inline" data-open-modal="legalModal">Ver detalles</button>
+          </label>
+        </div>
+
+        <button id="btnLoginEmail" class="btn primary" type="submit" disabled>Ingresar con correo</button>
+
+        <div class="divider"><span>o continuar con</span></div>
+
+        <div class="oauth-buttons">
+          <button id="btnGoogle" type="button" class="btn google" disabled>Google</button>
+          <button id="btnWhatsapp" type="button" class="btn whatsapp" disabled>WhatsApp</button>
+        </div>
+
+        <div class="meta">
+          <a class="link" href="#crear">Crear cuenta</a>
+        </div>
+      </form>
+
+      <div class="notice" id="recaptchaNotice" hidden>
+        Varios intentos fallidos. Completa reCAPTCHA en Auth0 para continuar.
+      </div>
+
+      <div class="pending" id="pendingApproval" hidden>
+        Acceso de <span data-pending-role>taller</span> enviado. Pendiente de aprobación.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="legal">
+    <div class="legal">
+      <small>
+        © <span id="year"></span> VEHICERT — Todos los derechos reservados •
+        <a class="link" href="#">Política de privacidad</a> •
+        <a class="link" href="#">Términos de uso</a>
+      </small>
+    </div>
+  </footer>
+
+  <!-- Modal legal -->
+  <dialog id="legalModal" class="modal">
+    <form method="dialog" class="modal-body">
+      <h3>Consentimiento informado</h3>
+      <p>
+        Al continuar autorizas a VEHICERT a consultar fuentes externas (RUNT,
+        SIMIT, aseguradoras y entidades financieras) para consolidar el
+        historial vehicular y generar el Certificado VEHICERT.
+      </p>
+      <ul>
+        <li>Uso con fines de verificación, trazabilidad y seguridad.</li>
+        <li>Tratamiento conforme a la legislación colombiana de datos.</li>
+        <li>Puedes revocar tu consentimiento en cualquier momento.</li>
+      </ul>
+      <div class="modal-actions">
+        <button class="btn ghost" value="cancel">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
